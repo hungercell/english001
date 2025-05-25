@@ -3,40 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>영어 단어 카드 게임</title>
-    <link rel="stylesheet" href="style.css">
+    <title>DEUX 퀴즈 게임</title>
+    
+    <!-- Open Graph / 썸네일 메타 태그 -->
+    <meta property="og:title" content="DEUX 퀴즈 게임 🎤">
+    <meta property="og:description" content="90년대 레전드 듀오 DEUX를 얼마나 알고 계신가요? 김성재와 이현도의 추억을 되살려보세요!">
+    <meta property="og:image" content="https://deux001.pages.dev/thumbnail.jpg">
+    <meta property="og:url" content="https://deux001.pages.dev/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DEUX 퀴즈 게임">
+    
+    <!-- Twitter Card 메타 태그 -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DEUX 퀴즈 게임 🎤">
+    <meta name="twitter:description" content="90년대 레전드 듀오 DEUX를 얼마나 알고 계신가요?">
+    <meta name="twitter:image" content="https://deux001.pages.dev/thumbnail.jpg">
+    
+    <!-- 기본 SEO 메타 태그 -->
+    <meta name="description" content="90년대 대표 듀오 DEUX에 대한 퀴즈 게임. 김성재와 이현도의 음악과 추억을 되살려보세요!">
+    <meta name="keywords" content="DEUX, 듀스, 김성재, 이현도, 90년대, 퀴즈, 게임, 음악, 댄스">
+    <meta name="author" content="DEUX Quiz Game">
+    
+    <link rel="stylesheet" href="quiz-style.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>영어 단어 카드 게임</h1>
-            <div class="score-board">
+            <h1>🎤 DEUX 퀴즈 게임 🎵</h1>
+            <div class="score-info">
                 <div class="score">점수: <span id="score">0</span></div>
-                <div class="tries">시도: <span id="tries">0</span></div>
+                <div class="question-count">문제: <span id="current-question">0</span>/<span id="total-questions">0</span></div>
             </div>
         </header>
         
         <main>
-            <div class="game-controls">
-                <button id="startBtn" class="btn">게임 시작</button>
-                <button id="resetBtn" class="btn">다시 시작</button>
-                <select id="difficulty">
-                    <option value="easy">쉬움 (6장)</option>
-                    <option value="medium">보통 (12장)</option>
-                    <option value="hard">어려움 (20장)</option>
-                </select>
-            </div>
-            
-            <div class="game-board" id="gameBoard">
-                <!-- 카드들이 여기에 동적으로 생성됩니다 -->
-            </div>
-            
-            <div class="game-info">
-                <p id="gameStatus">게임을 시작하려면 '게임 시작' 버튼을 클릭하세요!</p>
+            <div class="game-area" id="gameArea">
+                <div class="start-screen" id="startScreen">
+                    <div class="intro">
+                        <h2>90년대 대표 듀오 DEUX를 얼마나 알고 계신가요?</h2>
+                        <p>김성재와 이현도로 구성된 전설적인 듀오 DEUX에 대한 퀴즈입니다!</p>
+                        <div class="difficulty-select">
+                            <h3>난이도 선택:</h3>
+                            <label>
+                                <input type="radio" name="difficulty" value="easy" checked>
+                                <span>쉬움 (5문제)</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="difficulty" value="medium">
+                                <span>보통 (8문제)</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="difficulty" value="hard">
+                                <span>어려움 (10문제)</span>
+                            </label>
+                        </div>
+                        <button id="startBtn" class="btn start-btn">퀴즈 시작!</button>
+                    </div>
+                </div>
+                
+                <div class="quiz-screen" id="quizScreen" style="display: none;">
+                    <div class="progress-bar">
+                        <div class="progress" id="progress"></div>
+                    </div>
+                    
+                    <div class="question-container">
+                        <h2 id="questionText">문제가 여기에 표시됩니다.</h2>
+                        <div class="options" id="optionsContainer">
+                            <!-- 선택지들이 여기에 동적으로 생성됩니다 -->
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-controls">
+                        <button id="nextBtn" class="btn next-btn" style="display: none;">다음 문제</button>
+                    </div>
+                </div>
+                
+                <div class="result-screen" id="resultScreen" style="display: none;">
+                    <div class="result-content">
+                        <h2>퀴즈 완료!</h2>
+                        <div class="final-score">
+                            <span id="finalScore">0</span>점
+                        </div>
+                        <div class="score-message" id="scoreMessage">
+                            <!-- 점수에 따른 메시지 -->
+                        </div>
+                        <div class="result-stats">
+                            <div class="stat">
+                                <span class="stat-label">정답률:</span>
+                                <span id="accuracy">0%</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">맞힌 문제:</span>
+                                <span id="correctAnswers">0</span>개
+                            </div>
+                        </div>
+                        <div class="result-actions">
+                            <button id="restartBtn" class="btn restart-btn">다시 도전</button>
+                            <button id="shareBtn" class="btn share-btn">결과 공유</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
+        
+        <footer>
+            <p>DEUX를 기억하며... 🎶</p>
+        </footer>
     </div>
     
-    <script src="script.js"></script>
+    <script src="quiz-script.js"></script>
 </body>
 </html>
