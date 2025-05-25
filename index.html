@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>영어 단어 카드 게임</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>영어 단어 카드 게임</h1>
+            <div class="score-board">
+                <div class="score">점수: <span id="score">0</span></div>
+                <div class="tries">시도: <span id="tries">0</span></div>
+            </div>
+        </header>
+        
+        <main>
+            <div class="game-controls">
+                <button id="startBtn" class="btn">게임 시작</button>
+                <button id="resetBtn" class="btn">다시 시작</button>
+                <select id="difficulty">
+                    <option value="easy">쉬움 (6장)</option>
+                    <option value="medium">보통 (12장)</option>
+                    <option value="hard">어려움 (20장)</option>
+                </select>
+            </div>
+            
+            <div class="game-board" id="gameBoard">
+                <!-- 카드들이 여기에 동적으로 생성됩니다 -->
+            </div>
+            
+            <div class="game-info">
+                <p id="gameStatus">게임을 시작하려면 '게임 시작' 버튼을 클릭하세요!</p>
+            </div>
+        </main>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
